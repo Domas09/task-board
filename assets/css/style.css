@@ -14,3 +14,11 @@ body {
 .task-card:hover {
   cursor: grab;
 }
+
+.task-late{
+  background-color: tomato;
+}
+
+.task-today{
+  background-color: yellowgreen;
+}

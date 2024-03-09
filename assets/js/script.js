@@ -14,7 +14,23 @@ function createTaskCard(task) {
   const taskBody = $("<div>").addClass("card-body");
   const taskDueDate = $("<p>").addClass("card-text").text(task.date);
   const taskDescription = $("<p>").addClass("card-text").text(task.description);
-  const taskDeleteButton = $("<button>").addClass("btn btn-danger delete").text("Remove").attr("data-task-id", task.id)
+  const taskDeleteButton = $("<button>").addClass("btn btn-danger delete").text("Remove").attr("data-task-id", task.id);
+  taskDeleteButton.on("click", handleAddTask);
+  if (task.date && task.status !== "done"){
+    const day = dayjs();
+    const dueDate = dayjs(task.date, "DD/MM/YYYY");
+
+    if (day.isSame(dueDate, "day")) {
+      taskCard.addClass("task-today text-white");
+    } else if (day.isAfter(dueDate)){
+      taskCard.addClass("task-late text-white");
+      taskDeleteButton.addClass("border-light");
+    }
+  }
+  taskBody.append(taskDueDate, taskDescription, taskDeleteButton);
+  taskCard.append(taskHeader, taskBody);
+
+  return taskCard;
 }
 
 // Todo: create a function to render the task list and make cards draggable
@@ -24,7 +40,8 @@ function renderTaskList() {
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
-
+  const taskId = $(this).attr("data-task-id");
+  const tasks = 
 }
 
 // Todo: create a function to handle deleting a task
