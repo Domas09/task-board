@@ -1,9 +1,9 @@
 // Retrieve tasks and nextId from localStorage
-let nextId = JSON.parse(localStorage.getItem("nextId"));
 const formModalEl = $("#formModal");
 const titleInputEl = $("#titleInput");
 const dateEl = $("#datepicker");
 const taskDescriptionEl = $("#taskDescription");
+const displayEl = $("#display");
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
@@ -99,7 +99,7 @@ function handleAddTask(event){
 }
 
 // Todo: create a function to handle deleting a task
-function handleDeleteTask(event){
+function handleDeleteTask(){
   const taskId = $(this).attr("data-task-id");
   const tasks = readTasksFromStorage();
 
@@ -108,6 +108,10 @@ function handleDeleteTask(event){
       tasks.splice(tasks.indexOf(task), 1);
     }
   });
+
+  saveTasksToStorage(tasks);
+
+  renderTaskList();
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
@@ -125,3 +129,4 @@ $(document).ready(function () {
 });
 
 formModalEl.on("submit", handleAddTask);
+displayEl.on("click", ".btn-delete-task", handleDeleteTask);
