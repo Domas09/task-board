@@ -105,7 +105,7 @@ function handleDeleteTask(event){
 
   tasks.forEach((task) => {
     if (task.id === taskId) {
-      tasks.splice(projects.indexOf(task), 1);
+      tasks.splice(tasks.indexOf(task), 1);
     }
   });
 }
