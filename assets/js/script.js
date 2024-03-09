@@ -100,7 +100,14 @@ function handleAddTask(event){
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event){
+  const taskId = $(this).attr("data-task-id");
+  const tasks = readTasksFromStorage();
 
+  tasks.forEach((task) => {
+    if (task.id === taskId) {
+      tasks.splice(projects.indexOf(task), 1);
+    }
+  });
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
